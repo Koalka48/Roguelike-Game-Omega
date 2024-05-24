@@ -16,10 +16,6 @@ public class WeaponContoller : MonoBehaviour
 
     void Update()
     {
-        if(player.IsDestroyed())
-        {
-            gameObject.SetActive(false);
-        }
         transform.position = player.transform.position + offset;
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -41,5 +37,10 @@ public class WeaponContoller : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, -90, 0); 
             Instantiate(bullet, transform.position - bulletOffset, Quaternion.Euler(90, 90, 0));
         }
+    }
+
+    public void DestroyWeapon()
+    {
+        Destroy(gameObject);
     }
 }
