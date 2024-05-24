@@ -13,12 +13,15 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     public GameObject weapon;
     private Animator playerAnim;
+    private GameManager gameManager;
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerAnim = GetComponent<Animator>();
         playerAnim.speed = 2.0f;
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        //Physics.IgnoreLayerCollision(0,1);
     }
 
     // Update is called once per frame
@@ -38,5 +41,22 @@ public class PlayerController : MonoBehaviour
         }
         playerRb.velocity = movement * speed;
         playerRb.AddForce(Vector3.down * additionalForce);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Void"))
+        {
+            Destroy(gameObject);
+            gameManager.GameOver();
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("WinPortal"))
+        {
+            gameManager.Win();
+        }
     }
 }

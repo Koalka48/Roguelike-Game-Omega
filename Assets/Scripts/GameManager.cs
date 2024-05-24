@@ -28,6 +28,11 @@ public class GameManager : MonoBehaviour
         scoreText.text = "Score: " + score;
     }
 
+    public void Win()
+    {
+        SaveHighScore();
+        SceneManager.LoadScene("Menu");
+    }
     public void GameOver()
     {
         gameOverText.gameObject.SetActive(true);
@@ -40,6 +45,7 @@ public class GameManager : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             enemy.GetComponent<EnemyAI>().enabled = false;
+            enemy.GetComponent<EnemyWeapon>().enabled = false;
         }
     }
 

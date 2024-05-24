@@ -27,7 +27,6 @@ public class DetectCollisions : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             gameManager.GameOver();
-            weaponContoller.DestroyWeapon();
             return;
         }
         Destroy(gameObject);
